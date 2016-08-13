@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('link', 'LinkController');
+Route::resource('category', 'CategoryController');
+
+Route::get('/', [
+    'as' => 'home', 'uses' => 'HomeController@show'
+]);
+
+//Route::get('/', function () {
+//    return view('welcome');
+//});
