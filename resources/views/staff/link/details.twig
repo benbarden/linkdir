@@ -3,19 +3,17 @@
 {% block page_title %}Link details{% endblock page_title %}
 
 {% block content_body %}
-
 <h1>Link details</h1>
-<table cellspacing="1" cellpadding="5" border="1" style="width: 50%;">
+<table class="table">
     <tr>
-        <th style="text-align: right;">Field</th>
-        <th style="text-align: left;">Value</th>
+        <th class="col-xs-3">Field</th>
+        <th class="col-xs-9">Value</th>
     </tr>
     {% for dbKey, dbValue in linkDetails %}
         <tr>
-            <td style="text-align: right;">{{ dbKey }}</td>
-            <td style="text-align: left;">{{ dbValue }}</td>
+            <td>{{ dbKey }}</td>
+            <td>{{ dbValue }}</td>
         </tr>
     {% endfor %}
 </table>
-
 {% endblock content_body %}
