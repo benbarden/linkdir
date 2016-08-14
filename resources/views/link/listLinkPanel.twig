@@ -1,11 +1,23 @@
 <div class="panel">
     <div class="panel-heading">
-        <strong>{{ link.TITLE }}</strong>
+        <strong>
+            {% if link.NOFOLLOW == 1 %}
+                {% set linkNoFollowHtml = ' rel="nofollow"' %}
+            {% else %}
+                {% set linkNoFollowHtml = '' %}
+            {% endif %}
+            <a href="{{ link.URL }}" title="Visit blog" target="_blank"{{ linkNoFollowHtml }}>{{ link.TITLE }}</a> :
+            <a href="{{ link.getDetailsUrl() }}" title="View more details">Details</a>
+        </strong>
     </div>
     <div class="panel-body">
         {{ link.DESCRIPTION }}
     </div>
     <div class="panel-footer">
-        <a href="{{ link.getDetailsUrl() }}">Details</a>
+        {% if link.RATE_COUNT == 0 %}
+            <em>Not rated</em>
+        {% else %}
+            Rated: {{ link.RATE }}/10 ({{ link.RATE_COUNT }} ratings)
+        {% endif %}
     </div>
 </div>
