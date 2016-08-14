@@ -1,4 +1,4 @@
-{% if categoryList %}
+{% if categoryList.count > 0 %}
     <h2>Subcategories</h2>
     {% set rowNum = -1 %}
     {% for category in categoryList %}
