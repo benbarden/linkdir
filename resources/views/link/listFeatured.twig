@@ -1,12 +1,32 @@
 {% if featuredLinks %}
     <h2>Featured listings</h2>
     <div id="featured-links-wrapper">
+        {% set rowNum = -1 %}
         {% for link in featuredLinks %}
-            <div class="featured-link" style="background: #ececec; border: 2px solid #cccccc; float: left; height: 200px; margin: 5px; width: 375px;">
-                <strong>{{ link.TITLE }}</strong>
-                <br>{{ link.DESCRIPTION }}
-                <br><a href="{{ link.getDetailsUrl() }}">Details</a>
+            {% set rowNum = rowNum + 1 %}
+            {% if rowNum == 0 %}
+                <div class="row">
+            {% endif %}
+            {% if rowNum % 4 == 0 %}
+                </div>
+                <div class="row">
+            {% endif %}
+            <div class="col-xs-6 col-sm-3">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <strong>{{ link.TITLE }}</strong>
+                    </div>
+                    <div class="panel-body">
+                        {{ link.DESCRIPTION }}
+                    </div>
+                    <div class="panel-footer">
+                        <a href="{{ link.getDetailsUrl() }}">Details</a>
+                    </div>
+                </div>
             </div>
+            {% if rowNum == featuredLinks.count-1 %}
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endif %}
