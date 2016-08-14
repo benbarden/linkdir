@@ -28,6 +28,27 @@ class LinkController extends Controller
 
         $bindings['link'] = $link;
 
+        // Category links
+        $categoryCrumbs = array();
+        $linkCategory = \App\Category::where('ID', $link->CATEGORY_ID)->first();
+        if ($linkCategory) {
+            array_unshift($categoryCrumbs, $linkCategory);
+            if ($linkCategory->PARENT_ID > 0) {
+                $linkCategoryParent1 = \App\Category::where('ID', $linkCategory->PARENT_ID)->first();
+                if ($linkCategoryParent1) {
+                    array_unshift($categoryCrumbs, $linkCategoryParent1);
+                    if ($linkCategoryParent1->PARENT_ID > 0) {
+                        $linkCategoryParent2 = \App\Category::where('ID', $linkCategoryParent1->PARENT_ID)->first();
+                        if ($linkCategoryParent2) {
+                            array_unshift($categoryCrumbs, $linkCategoryParent2);
+                        }
+                    }
+                }
+            }
+        }
+
+        $bindings['categoryCrumbs'] = $categoryCrumbs;
+
         return view('link.show')->with($bindings);
     }
 

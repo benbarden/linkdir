@@ -4,6 +4,81 @@
 
 {% block content_body %}
     <h1 class="title">{{ link.TITLE }}</h1>
-    <p>{{ link.DESCRIPTION }}</p>
+    {% if link.NOFOLLOW == 1 %}
+        {% set linkNoFollowHtml = ' rel="nofollow"' %}
+    {% else %}
+        {% set linkNoFollowHtml = '' %}
+    {% endif %}
+    <table>
+        <tr>
+            <td>Title</td>
+            <td>{{ link.TITLE }}</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td><a href="{{ link.URL }}" target="_blank"{{ linkNoFollowHtml }}>{{ link.URL }}</a></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>{{ link.DESCRIPTION }}</td>
+        </tr>
+        <tr>
+            <td>Category</td>
+            <td>
+                {% if categoryCrumbs %}
+                    {% set crumbNum = 0 %}
+                    {% for crumb in categoryCrumbs %}
+                        {% set crumbNum = crumbNum + 1 %}
+                        <a href="{{ crumb.CACHE_URL }}">{{ crumb.TITLE }}</a>
+                        {% if crumbNum < categoryCrumbs|length %}
+                            &raquo;
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>Owner</td>
+            <td>{{ link.OWNER_NAME }}</td>
+        </tr>
+        <tr>
+            <td>Added</td>
+            <td>{{ link.DATE_ADDED }}</td>
+        </tr>
+        <tr>
+            <td>Hits</td>
+            <td>{{ link.HITS }}</td>
+        </tr>
+        <tr>
+            <td>Rating</td>
+            <td>
+                {% if link.RATE_COUNT == 0 %}
+                    <em>Not rated</em>
+                {% else %}
+                    Rated: {{ link.RATE }}/10 ({{ link.RATE_COUNT }} ratings)
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>Site resources</td>
+            <td>
+                {% if link.URL1 and link.TITLE1 %}
+                    <a href="{{ link.URL1 }}" target="_blank"{{ linkNoFollowHtml }}>{{ link.TITLE1 }}</a><br>
+                {% endif %}
+                {% if link.URL2 and link.TITLE2 %}
+                    <a href="{{ link.URL2 }}" target="_blank"{{ linkNoFollowHtml }}>{{ link.TITLE2 }}</a><br>
+                {% endif %}
+                {% if link.URL3 and link.TITLE3 %}
+                    <a href="{{ link.URL3 }}" target="_blank"{{ linkNoFollowHtml }}>{{ link.TITLE3 }}</a><br>
+                {% endif %}
+                {% if link.URL4 and link.TITLE4 %}
+                    <a href="{{ link.URL4 }}" target="_blank"{{ linkNoFollowHtml }}>{{ link.TITLE4 }}</a><br>
+                {% endif %}
+                {% if link.URL5 and link.TITLE5 %}
+                    <a href="{{ link.URL5 }}" target="_blank"{{ linkNoFollowHtml }}>{{ link.TITLE5 }}</a><br>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
 
 {% endblock content_body %}
