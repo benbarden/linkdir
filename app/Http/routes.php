@@ -38,8 +38,9 @@ $allowedCategories = [
     'Technology', 'Travel', 'video-blogs-vlogs', 'Writing_Publishing'
 ];
 
-Route::get('/{categoryUrl}/{subcategoryUrl?}', 'CategoryController@show')
-    ->where('categoryUrl', implode('|', array_map('preg_quote', $allowedCategories)));
+//Route::get('/{categoryUrl}/{subcategoryUrl?}', 'CategoryController@show')
+//    ->where('categoryUrl', implode('|', array_map('preg_quote', $allowedCategories)));
+Route::get('/{categorySlug1}/{categorySlug2?}/{categorySlug3?}', 'CategoryController@show');
 
 //Route::get('/', function () {
 //    return view('welcome');

@@ -8,13 +8,23 @@ use App\Http\Requests;
 
 class CategoryController extends Controller
 {
-    public function show($categoryUrl)
+    public function show($categorySlug1, $categorySlug2 = "", $categorySlug3 = "")
     {
         $bindings = array();
 
+        if ($categorySlug3) {
+            $categoryUrl = sprintf('%s/%s/%s/', $categorySlug1, $categorySlug2, $categorySlug3);
+        } elseif ($categorySlug2) {
+            $categoryUrl = sprintf('%s/%s/', $categorySlug1, $categorySlug2);
+        } elseif ($categorySlug1) {
+            $categoryUrl = sprintf('%s/', $categorySlug1);
+        } else {
+            abort(404);
+        }
+
         $category = \App\Category::
             where('status', 2)
-            ->where('cache_url', sprintf('%s/', $categoryUrl))
+            ->where('cache_url', $categoryUrl)
             ->first();
 
         if (!$category) {
