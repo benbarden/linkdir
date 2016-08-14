@@ -17,7 +17,12 @@
         {% if link.RATE_COUNT == 0 %}
             <em>Not rated</em>
         {% else %}
-            Rated: {{ link.RATE }}/10 ({{ link.RATE_COUNT }} ratings)
+            {% if link.RATE_COUNT == 1 %}
+                {% set ratingDesc = 'rating' %}
+            {% else %}
+                {% set ratingDesc = 'ratings' %}
+            {% endif %}
+            Rated: {{ link.RATE }}/10 ({{ link.RATE_COUNT }} {{ ratingDesc }})
         {% endif %}
     </div>
 </div>
