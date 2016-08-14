@@ -1,0 +1,39 @@
+{% extends 'theme/staff/base.twig' %}
+
+{% block page_title %}Category list{% endblock page_title %}
+
+{% block content_body %}
+
+<h1>Category list</h1>
+{% if parentCategory %}
+    <h2>Categories under: {{ parentCategory.TITLE }}</h2>
+{% else %}
+    <h2>Top-level categories</h2>
+{% endif %}
+{% if categoryList.count > 0 %}
+    <table cellspacing="1" cellpadding="5" border="1" style="width: 50%;">
+        <tr>
+            <th style="text-align: right;">ID</th>
+            <th style="text-align: left;">Title</th>
+            <th style="text-align: center;"></th>
+        </tr>
+        {% for category in categoryList %}
+            <tr>
+                <td style="text-align: right;">{{ category.ID }}</td>
+                <td style="text-align: left;">{{ category.TITLE }}</td>
+                <td style="text-align: center;">
+                    <a href="/staff/category/list/{{ category.ID }}">
+                        Subcategories
+                    </a> |
+                    <a href="/staff/link/list/{{ category.ID }}">
+                        Links
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No categories!</p>
+{% endif %}
+
+{% endblock content_body %}

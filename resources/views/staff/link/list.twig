@@ -1,0 +1,32 @@
+{% extends 'theme/staff/base.twig' %}
+
+{% block page_title %}Link list{% endblock page_title %}
+
+{% block content_body %}
+
+<h1>Link list</h1>
+<h2>Links under: {{ category.TITLE }}</h2>
+{% if linkList.count > 0 %}
+    <table cellspacing="1" cellpadding="5" border="1" style="width: 50%;">
+        <tr>
+            <th style="text-align: right;">ID</th>
+            <th style="text-align: left;">Title</th>
+            <th style="text-align: center;"></th>
+        </tr>
+        {% for link in linkList %}
+            <tr>
+                <td style="text-align: right;">{{ link.ID }}</td>
+                <td style="text-align: left;">{{ link.TITLE }}</td>
+                <td style="text-align: center;">
+                    <a href="{{ link.getDetailsUrl() }}">Details</a>
+                     |
+                    <a href="/staff/link/details/{{ link.ID }}">Full details</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No links!</p>
+{% endif %}
+
+{% endblock content_body %}
