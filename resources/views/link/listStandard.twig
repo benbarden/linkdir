@@ -12,17 +12,7 @@
                 <div class="row">
             {% endif %}
             <div class="col-xs-6 col-sm-4">
-                <div class="panel">
-                    <div class="panel-heading">
-                        <strong>{{ link.TITLE }}</strong>
-                    </div>
-                    <div class="panel-body">
-                        {{ link.DESCRIPTION }}
-                    </div>
-                    <div class="panel-footer">
-                        <a href="{{ link.getDetailsUrl() }}">Details</a>
-                    </div>
-                </div>
+                {% include 'link/listLinkPanel.twig' with {'link': link} %}
             </div>
             {% if rowNum == standardLinks.count-1 %}
                 </div>
