@@ -1,0 +1,21 @@
+{% if categoryList %}
+    <table>
+        {% set rowNum = -1 %}
+        {% for category in categoryList %}
+            {% set rowNum = rowNum + 1 %}
+            {% if rowNum == 0 %}
+                <tr>
+            {% endif %}
+            {% if rowNum % 5 == 0 %}
+                </tr>
+                <tr>
+            {% endif %}
+            <td style="padding: 15px 20px; text-align: left;">
+                <a href="{{ category.CACHE_URL }}">{{ category.TITLE }}</a>
+            </td>
+            {% if rowNum == categoryList.count-1 %}
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+{% endif %}

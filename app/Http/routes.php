@@ -11,12 +11,27 @@
 |
 */
 
-Route::resource('link', 'LinkController');
-Route::resource('category', 'CategoryController');
+//Route::resource('link', 'LinkController');
+//Route::resource('category', 'CategoryController');
 
 Route::get('/', [
     'as' => 'home', 'uses' => 'HomeController@show'
 ]);
+
+$allowedCategories = [
+    'Arts', 'Business', 'Computers', 'Education_Blogs', 'Entertainment_Blogs', 'fashion',
+    'Finance', 'Foreign_Languages', 'Games', 'Health_and_fitness', 'Crafts_hobby', 'Home_and_Garden',
+    'Humor_blogs', 'Internet', 'literary_blogs', 'News__Media', 'Miscellaneous', 'Personal_Blogs',
+    'Pets', 'podcasting_directory', 'Political_Blogs', 'Recreation', 'Regional', 'Religion',
+    'Blog_related_resources', 'RSS_XML_Feeds', 'Science', 'shopping', 'Society', 'Sports',
+    'Technology', 'Travel', 'video-blogs-vlogs', 'Writing_Publishing'
+];
+
+Route::get('/{linkTitle}-link-{linkId}.html', 'LinkController@show')
+    ->where(['linkTitle' => '[a-zA-Z0-9\&\-]+', 'linkId' => '[0-9]+']);
+
+Route::get('/{categoryUrl}/{subcategoryUrl?}', 'CategoryController@show')
+    ->where('categoryUrl', implode('|', array_map('preg_quote', $allowedCategories)));
 
 //Route::get('/', function () {
 //    return view('welcome');

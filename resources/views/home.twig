@@ -1,66 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>linkdir</title>
+{% extends 'theme/base.twig' %}
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+{% block page_title %}Home{% endblock page_title %}
 
-    <style>
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            display: table;
-            font-weight: 100;
-            font-family: 'Lato', sans-serif;
-        }
-
-        .container {
-            text-align: center;
-            display: table-cell;
-            vertical-align: middle;
-        }
-
-        .content {
-            text-align: center;
-            display: inline-block;
-        }
-
-        .title {
-            font-size: 64px;
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-    <div class="content">
-        <div class="title">linkdir</div>
-        {% if categoryList %}
-            <table cellpadding="10">
-            {% set rowNum = -1 %}
-            {% for category in categoryList %}
-                {% set rowNum = rowNum + 1 %}
-                {% if rowNum == 0 %}
-                    <tr>
-                {% endif %}
-                {% if rowNum % 5 == 0 %}
-                    </tr>
-                    <tr>
-                {% endif %}
-                    <td>
-                        <p><a href="{{ category.CACHE_URL }}">{{ category.TITLE }}</a></p>
-                    </td>
-                {% if rowNum == categoryList.count-1 %}
-                    </tr>
-                {% endif %}
-            {% endfor %}
-            </table>
-        {% endif %}
-    </div>
-</div>
-</body>
-</html>
+{% block content_body %}
+    <h1 class="title">Home</h1>
+    {% include 'category/linkedListTop.twig' with {'categoryList': categoryList} %}
+{% endblock content_body %}

@@ -1,0 +1,9 @@
+{% extends 'theme/base.twig' %}
+
+{% block page_title %}{{ link.TITLE }}{% endblock page_title %}
+
+{% block content_body %}
+    <h1 class="title">{{ link.TITLE }}</h1>
+    <p>{{ link.DESCRIPTION }}</p>
+
+{% endblock content_body %}

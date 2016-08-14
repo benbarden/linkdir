@@ -1,0 +1,11 @@
+{% extends 'theme/base.twig' %}
+
+{% block page_title %}{{ category.TITLE }}{% endblock page_title %}
+
+{% block content_body %}
+    <h1 class="title">{{ category.TITLE }}</h1>
+    <p>{{ category.DESCRIPTION }}</p>
+    {% include 'category/linkedListSubCat.twig' with {'categoryList': categoryList} %}
+    {% include 'link/listFeatured.twig' with {'featuredLinks': featuredLinks} %}
+
+{% endblock content_body %}

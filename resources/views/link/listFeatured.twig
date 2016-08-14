@@ -1,0 +1,12 @@
+{% if featuredLinks %}
+    <h2>Featured listings</h2>
+    <div id="featured-links-wrapper">
+        {% for link in featuredLinks %}
+            <div class="featured-link" style="background: #ececec; border: 2px solid #cccccc; float: left; height: 200px; margin: 5px; width: 375px;">
+                <strong>{{ link.TITLE }}</strong>
+                <br>{{ link.DESCRIPTION }}
+                <br><a href="{{ link.getDetailsUrl() }}">Details</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
