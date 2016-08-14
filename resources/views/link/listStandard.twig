@@ -1,0 +1,33 @@
+{% if standardLinks %}
+    <h2>Listings</h2>
+    <div id="standard-links-wrapper">
+        {% set rowNum = -1 %}
+        {% for link in standardLinks %}
+            {% set rowNum = rowNum + 1 %}
+            {% if rowNum == 0 %}
+                <div class="row">
+            {% endif %}
+            {% if rowNum % 4 == 0 %}
+                </div>
+                <div class="row">
+            {% endif %}
+            <div class="col-xs-6 col-sm-3">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <strong>{{ link.TITLE }}</strong>
+                    </div>
+                    <div class="panel-body">
+                        {{ link.DESCRIPTION }}
+                    </div>
+                    <div class="panel-footer">
+                        <a href="{{ link.getDetailsUrl() }}">Details</a>
+                    </div>
+                </div>
+            </div>
+            {% if rowNum == standardLinks.count-1 %}
+                </div>
+            {% endif %}
+        {% endfor %}
+        {{ standardLinks.links()|raw }}
+    </div>
+{% endif %}

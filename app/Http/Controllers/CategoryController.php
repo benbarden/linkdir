@@ -21,22 +21,30 @@ class CategoryController extends Controller
             abort(404);
         }
 
+        $categoryId = $category->ID;
+
         $bindings['category'] = $category;
 
         $bindings['featuredLinks'] = \App\Link::
             where('status', 2)
-            ->where('category_id', $category->ID)
+            ->where('category_id', $categoryId)
             ->where('featured', 1)
             ->orderBy('title')
             ->get();
 
         $bindings['categoryList'] = \App\Category::
             where('status', 2)
-            ->where('parent_id', $category->ID)
+            ->where('parent_id', $categoryId)
             ->whereNotNull('cache_title')
             ->whereNotNull('cache_url')
             ->orderBy('title')
             ->get();
+
+        $bindings['standardLinks'] = \App\Link::
+            where('status', 2)
+            ->where('category_id', $categoryId)
+            ->orderBy('title')
+            ->paginate(12);
 
         return view('category.show')->with($bindings);
     }

@@ -7,5 +7,6 @@
     <p>{{ category.DESCRIPTION }}</p>
     {% include 'category/linkedListSubCat.twig' with {'categoryList': categoryList} %}
     {% include 'link/listFeatured.twig' with {'featuredLinks': featuredLinks} %}
+    {% include 'link/listStandard.twig' with {'standardLinks': standardLinks} %}
 
 {% endblock content_body %}
