@@ -44,7 +44,7 @@ class CategoryController extends Controller
             where('status', 2)
             ->where('category_id', $categoryId)
             ->orderBy('title')
-            ->paginate(12);
+            ->paginate(21);
 
         return view('category.show')->with($bindings);
     }
